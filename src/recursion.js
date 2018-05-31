@@ -422,8 +422,6 @@ var flatten = function(array) {
 
   return [].concat(flatten(array[0])).concat(flatten(array.slice(1)));
 };
-// console.log('Flattened', flatten([[1], [2, 3], [[4]]]));
-console.log('MultiValue Array:', flatten([[1, 2, 3]]));
 
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
