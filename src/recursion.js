@@ -198,7 +198,25 @@ var divide = function(x, y) {};
 // gcd(4,36); // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
-var gcd = function(x, y) {};
+var gcd = function(x, y) {
+    if (x < 0 || y < 0) { 
+        return null;
+    }
+
+    let min = Math.min(x, y);
+    let max = Math.max(x, y);
+    if (min === 0) {
+        return max;
+    }
+
+    let remainder = max % min;
+
+    if (remainder === 0) { 
+        return min;
+    }
+
+    return gcd(min, remainder);
+};
 
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
@@ -309,14 +327,38 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {};
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
-var fibonacci = function(n) {};
+var fibonacci = function(n) {
+    if (n < 1) {
+        return null;
+    }
+
+    if (n === 1) {
+        return [0, 1];
+    }
+
+    let arr = fibonacci(n-1);
+    let n_1 = arr.slice(-1)[0];
+    let n_2 = arr.slice(-2, -1)[0];
+    arr.push(n_1 + n_2);
+
+    return arr;
+};
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
 // [0,1,1,2,3,5,8,13,21]
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function(n) {};
+var nthFibo = function(n) {
+    if (n < 0) {
+        return null;
+    }
+    if (n < 2) {
+        return n;
+    }
+
+    return nthFibo(n - 2) + nthFibo(n - 1);
+};
 
 // 27. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
