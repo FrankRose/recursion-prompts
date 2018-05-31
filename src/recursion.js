@@ -78,6 +78,7 @@ var sumBelow = function(n) {
   }
 
   return n + step + sumBelow(n + step);
+  // return n === -step || n === 0 ? 0 : n + step + sumBelow(n + step);
 };
 
 // 6. Get the integers within a range (x, y).
@@ -199,23 +200,23 @@ var divide = function(x, y) {};
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
-    if (x < 0 || y < 0) { 
-        return null;
-    }
+  if (x < 0 || y < 0) {
+    return null;
+  }
 
-    let min = Math.min(x, y);
-    let max = Math.max(x, y);
-    if (min === 0) {
-        return max;
-    }
+  let min = Math.min(x, y);
+  let max = Math.max(x, y);
+  if (min === 0) {
+    return max;
+  }
 
-    let remainder = max % min;
+  let remainder = max % min;
 
-    if (remainder === 0) { 
-        return min;
-    }
+  if (remainder === 0) {
+    return min;
+  }
 
-    return gcd(min, remainder);
+  return gcd(min, remainder);
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -305,15 +306,15 @@ var countOccurrence = function(array, value) {
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
-    if (array.length === 0) {
-        return [];
-    }
+  if (array.length === 0) {
+    return [];
+  }
 
-    if (array.length === 1) {
-        return [callback(array[0])];
-    }
+  if (array.length === 1) {
+    return [callback(array[0])];
+  }
 
-    return [callback(array[0])].concat(rMap(array.slice(1), callback));
+  return [callback(array[0])].concat(rMap(array.slice(1), callback));
 };
 
 // 22. Write a function that counts the number of times a key occurs in an object.
@@ -338,20 +339,20 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {};
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
-    if (n < 1) {
-        return null;
-    }
+  if (n < 1) {
+    return null;
+  }
 
-    if (n === 1) {
-        return [0, 1];
-    }
+  if (n === 1) {
+    return [0, 1];
+  }
 
-    let arr = fibonacci(n-1);
-    let n_1 = arr.slice(-1)[0];
-    let n_2 = arr.slice(-2, -1)[0];
-    arr.push(n_1 + n_2);
+  let arr = fibonacci(n - 1);
+  let n_1 = arr.slice(-1)[0];
+  let n_2 = arr.slice(-2, -1)[0];
+  arr.push(n_1 + n_2);
 
-    return arr;
+  return arr;
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
@@ -360,14 +361,14 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
-    if (n < 0) {
-        return null;
-    }
-    if (n < 2) {
-        return n;
-    }
+  if (n < 0) {
+    return null;
+  }
+  if (n < 2) {
+    return n;
+  }
 
-    return nthFibo(n - 2) + nthFibo(n - 1);
+  return nthFibo(n - 2) + nthFibo(n - 1);
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
@@ -388,7 +389,6 @@ var capitalizeFirst = function(array) {
     return [array[0][0].toUpperCase() + array[0].slice(1)];
   }
 
-  //   console.log(array[0][0].toUpperCase() + array[0].slice(1));
   let word = array[0][0].toUpperCase() + array[0].slice(1);
   return [word].concat(capitalizeFirst(array.slice(1)));
 };
@@ -406,7 +406,24 @@ var nestedEvenSum = function(obj) {};
 
 // 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
-var flatten = function(array) {};
+var flatten = function(array) {
+  console.log('To be flattened:', array);
+  if (!Array.isArray(array)) {
+    return array;
+  }
+
+  if (array.length === 0) {
+    return [];
+  }
+
+  if (array.length === 1) {
+    return flatten(array[0]);
+  }
+
+  return [].concat(flatten(array[0])).concat(flatten(array.slice(1)));
+};
+// console.log('Flattened', flatten([[1], [2, 3], [[4]]]));
+console.log('MultiValue Array:', flatten([[1, 2, 3]]));
 
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
