@@ -175,12 +175,19 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
-  if (x < y) {
-    return x;
-  }
-
   if (y === 0) {
     return NaN;
+  }
+
+  if (y < 0 || x < 0) {
+    x = x < 0 ? -x : x;
+    y = y < 0 ? -y : y;
+
+    return 0 - modulo(x, y);
+  }
+
+  if (x < y) {
+    return x;
   }
 
   return modulo(x - y, y);
@@ -407,7 +414,6 @@ var nestedEvenSum = function(obj) {};
 // 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
 var flatten = function(array) {
-  console.log('To be flattened:', array);
   if (!Array.isArray(array)) {
     return array;
   }
