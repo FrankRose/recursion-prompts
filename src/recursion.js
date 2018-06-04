@@ -375,7 +375,15 @@ var rMap = function(array, callback) {
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
-var countKeysInObj = function(obj, key) {};
+var countKeysInObj = function(obj, key) {
+  let count = 0;
+  for (let k in obj) {
+    count += k === key ? 1 : 0;
+    count += typeof obj[k] === 'object' ? countKeysInObj(obj[k], key) : 0;
+  }
+
+  return count;
+};
 
 // 23. Write a function that counts the number of times a value occurs in an object.
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
