@@ -586,7 +586,7 @@ var minimizeZeroes = function(list) {
 
   return output.concat(minimizeZeroes(list.slice(index)));
 };
-minimizeZeroes([2,0,0,0,1,4]);
+
 // 35. Alternate the numbers in an array between positive and negative regardless of
 // their original sign. The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
@@ -596,7 +596,21 @@ var alternateSign = function(array) {};
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {};
+var numToText = function(str) {
+  let sentence = str.split(' ');
+  let words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  let number = parseInt(sentence[0], 10);
+
+  if (!isNaN(number)) {
+    sentence[0] = words[sentence[0]];
+  }
+
+  if (sentence.length === 1) {
+    return sentence.join(' ');
+  }
+
+  return [sentence[0]].concat(numToText(sentence.slice(1).join(' '))).join(' ');
+};
 
 // *** EXTRA CREDIT ***
 
