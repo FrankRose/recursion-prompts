@@ -62,7 +62,7 @@ var isEven = function(n) {
   }
 
   if (n < 0) {
-    return isEven(-n);
+    return isEven(n * -1);
   }
 
   return isEven(n - 2);
